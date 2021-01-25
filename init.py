@@ -56,7 +56,6 @@ def main():
                 
 
             print("Subject: ", subject) 
-            print("To: ", reciever) 
             print("From: ", sender)
             print("-"*20)
         except:
