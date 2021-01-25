@@ -37,6 +37,7 @@ def main():
     results = GMAIL.users().messages().list(userId="me", q='label:unread').execute()
     messages = results.get('messages');
 
+    unread_email = []
     for msg in messages:
         txt = GMAIL.users().messages().get(userId='me', id=msg['id']).execute();
 
@@ -51,15 +52,20 @@ def main():
                 if d['name'] == 'From':
                     sender = d['value']
                 if d['name'] == 'To':
-                    reciever = d['value']
+                    recipients = d['value']
                 
                 
 
-            print("Subject: ", subject) 
-            print("From: ", sender)
-            print("-"*20)
+            unread_email.append({
+                "subject": subject,
+                "from": sender,
+                "to": recipients, 
+            })
         except:
             pass
 
+    return unread_email
+
+
 if __name__ == '__main__':
-    main()
+    messages = main()
